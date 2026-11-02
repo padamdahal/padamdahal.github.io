@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-site-verification" content="1wapZroI0RMn7Q8qhYm1eNl564aUg4HIH94WBX25OVM" />
-  <title>Interactive Nepali Calendar (BS) — How to Use &amp; Embed on Your Site — Padam Dahal</title>
-  <meta name="description" content="Complete guide to the free Interactive Nepali Calendar (Bikram Sambat) from pbd.com.np. Learn click-to-copy, drag-to-fill, offline use, and how to embed the calendar on your own website with one script.">
+  <title>How to use &amp; embed the Interactive Nepali Calendar (BS) — Padam Dahal</title>
+  <meta name="description" content="Hands-on guide: try a live Bikram Sambat calendar embed, copy AD dates into forms, and add the same widget to your own site with one script from pbd.com.np.">
   <meta name="author" content="Padam Dahal">
-  <meta name="keywords" content="Nepali calendar, Bikram Sambat calendar, BS calendar online, embed Nepali calendar, Nepali patro, interactive BS calendar, drag drop date, pbd.com.np">
+  <meta name="keywords" content="Nepali calendar embed, Bikram Sambat widget, BS calendar for forms, drag drop Nepali date, pbd.com.np calendar">
   <link rel="canonical" href="https://padamdahal.github.io/guides/nepali-calendar-usage.html">
-  <meta property="og:title" content="Interactive Nepali Calendar (BS) — Usage &amp; Embed Guide">
-  <meta property="og:description" content="How to use the free Bikram Sambat month calendar, copy AD dates, drag days into form fields, and embed the same calendar on any website.">
+  <meta property="og:title" content="How to use &amp; embed the Interactive Nepali Calendar (BS)">
+  <meta property="og:description" content="Live demo plus clear steps for click-to-copy, drag-to-fill, and embedding the free Bikram Sambat calendar on any website.">
   <meta property="og:url" content="https://padamdahal.github.io/guides/nepali-calendar-usage.html">
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary">
@@ -90,6 +90,37 @@
       text-decoration: none;
     }
     .tool-box a.btn:hover { opacity: 0.92; text-decoration: none; }
+    .demo {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.15rem 1.25rem 1.35rem;
+      margin: 1.5rem 0;
+    }
+    .demo h2 { margin-top: 0; }
+    .demo-field {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 0.75rem;
+      margin: 1rem 0 0.35rem;
+    }
+    .demo-field label { font-size: 0.95rem; color: var(--muted); }
+    .demo-field input {
+      flex: 1 1 12rem;
+      min-width: 10rem;
+      padding: 0.5rem 0.65rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font: inherit;
+      background: #fff;
+    }
+    .demo-credit {
+      margin: 0.85rem 0 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    #calendar-demo { margin-top: 0.75rem; min-height: 12rem; }
     pre, code {
       font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
       font-size: 0.875rem;
@@ -122,123 +153,107 @@
     </nav>
 
     <article>
-      <h1>Interactive Nepali Calendar (BS) — How to Use &amp; Embed</h1>
+      <h1>How to use &amp; embed the Interactive Nepali Calendar (BS)</h1>
       <p class="meta">Practical guide · Updated November 2026</p>
 
-      <p>The <strong>Interactive Nepali Calendar</strong> on <a href="https://pbd.com.np/tools/nepali-calendar/" rel="noopener">pbd.com.np/tools/nepali-calendar</a> is a free, client-side Bikram Sambat (BS) month view. You can browse any month, click a day to copy its Gregorian (AD) ISO date, or drag a day cell onto a form field to fill it automatically. After the first visit the page and library work fully offline.</p>
+      <p>Nepali forms, banks, and many government workflows still expect <strong>Bikram Sambat (BS)</strong> dates. Software and international documents usually want the Gregorian (AD) ISO form <code>yyyy-mm-dd</code>. The free <a href="https://pbd.com.np/tools/nepali-calendar/" rel="noopener">Interactive Nepali Calendar</a> on pbd.com.np bridges that gap: browse any BS month, click a day to copy the AD date, or drag a day cell onto a form field.</p>
 
-      <p>This guide covers everyday use and how developers can embed the same calendar on their own sites so click-to-copy and drag-to-fill work on local forms.</p>
+      <p>This page is a short how-to for people filling forms and for developers who want the same widget on their own site. It is not a second copy of the tool — the full product lives on pbd.com.np. Here you get a live embed demo, when to use it, and the minimal code to mount it yourself.</p>
 
       <div class="tool-box">
-        <strong>Open the live calendar</strong>
-        <p style="margin:0.4rem 0 0;color:var(--muted);font-size:0.95rem;">Fully client-side. No sign-up. Works offline after load. Supports BS 2000–2090.</p>
+        <strong>Full tool on pbd.com.np</strong>
+        <p style="margin:0.4rem 0 0;color:var(--muted);font-size:0.95rem;">Standalone calendar page, offline-capable after first load, BS 2000–2090.</p>
         <a class="btn" href="https://pbd.com.np/tools/nepali-calendar/" rel="noopener">Open Interactive Nepali Calendar →</a>
       </div>
 
-      <h2>What the calendar does</h2>
+      <section class="demo" id="demo">
+        <h2>Live demo on this page</h2>
+        <p>The calendar below is loaded from the official script on pbd.com.np. Click a day to copy its AD date to the clipboard. Drag a day cell onto the field under the grid to fill it.</p>
+        <div id="calendar-demo"></div>
+        <div class="demo-field">
+          <label for="date-field">Drop a day here (or paste after click-to-copy):</label>
+          <input type="text" id="date-field" name="date-field" placeholder="yyyy-mm-dd" readonly>
+        </div>
+        <p class="demo-credit">Widget and data from <a href="https://pbd.com.np/tools/nepali-calendar/" rel="noopener">pbd.com.np/tools/nepali-calendar</a> — not hosted as a separate product on this site.</p>
+      </section>
+
+      <h2>When this is useful</h2>
       <ul>
-        <li>Shows a full Bikram Sambat month grid with optional AD dates.</li>
-        <li><strong>Click any day</strong> (or focus it and press Enter) → copies the Gregorian ISO date (<code>yyyy-mm-dd</code>) to the clipboard.</li>
-        <li><strong>Drag a day cell</strong> and drop it on any <code>&lt;input&gt;</code> or <code>&lt;textarea&gt;</code> on the same page → the field receives the ISO date (works on readonly fields by default).</li>
-        <li>Language toggle (Nepali / English), light/dark/auto theme, and Kathmandu timezone support.</li>
-        <li>API helpers for conversion: <code>NepaliCalendar.toAD()</code>, <code>NepaliCalendar.toBS()</code>, <code>NepaliCalendar.today()</code>.</li>
+        <li><strong>Filling Nepali forms that need AD</strong> — citizenship notes, bank KYC remarks, visa or university applications that ask for Gregorian while your papers show BS.</li>
+        <li><strong>Quick “what is today in BS?”</strong> — less friction than opening a full converter for a single date.</li>
+        <li><strong>Building a form for Nepali users</strong> — let them pick a BS day visually while your backend stores ISO AD.</li>
+        <li><strong>Offline or low-connectivity work</strong> — after the first load, the library can run without a network.</li>
       </ul>
 
-      <h2>Everyday usage</h2>
+      <h2>Everyday steps (no coding)</h2>
       <ol>
-        <li>Open the calendar page and navigate to the month you need.</li>
-        <li>Click a day to copy the AD date — paste it into bank forms, visa applications, spreadsheets, or chat.</li>
-        <li>If you are filling a form on the same page (or have embedded the calendar), drag the day cell directly onto the date field.</li>
-        <li>Use the language toggle when you want Devanagari month and day labels.</li>
+        <li>Open the <a href="https://pbd.com.np/tools/nepali-calendar/" rel="noopener">calendar tool</a> (or use the demo above).</li>
+        <li>Move to the month you need.</li>
+        <li>Click a day — the AD ISO date is copied; paste it where the form asks for English/Gregorian date.</li>
+        <li>On a page that already embeds the calendar, drag the day cell onto an input instead of copying.</li>
       </ol>
 
       <div class="callout">
-        <strong>Tip</strong>
-        Keep the calendar tab open while filling multiple forms. Click-to-copy is faster than switching between converter pages for every single date.
+        <strong>Accuracy note</strong>
+        Coverage is roughly BS 2000–2090. Years through BS 2083 are the ones commonly verified for everyday documents. For legal or financial deadlines after that, double-check against the calendar your office or bank uses.
       </div>
 
-      <h2>Supported range &amp; accuracy</h2>
-      <p>The calendar table covers <strong>BS 2000–2090</strong> (roughly AD 1943–2034). Years through BS 2083 are verified against common sources used in Nepal. Later years are marked provisional. For critical legal or financial documents, always double-check the final date against the calendar your office or bank uses.</p>
+      <h2>Embed the same calendar on your site</h2>
+      <p>Load the official script once. Mount a calendar in any container. Click-to-copy and drag-to-fill then work for inputs on that page. Keep the script <code>src</code> pointed at pbd.com.np so users always get the maintained build.</p>
 
-      <h2>How to embed the calendar on your own website</h2>
-      <p>The library is a single JavaScript file. Once loaded, click-to-copy and drag-to-fill work for every input on that page. You can mount a full interactive calendar or let the script auto-mount from a data attribute.</p>
-
-      <h3>1. Full interactive calendar (recommended)</h3>
-      <p>Include the script once, place a container, then call <code>NepaliCalendar.mount()</code>.</p>
-      <pre><code>&lt;!-- 1. Include the library (once per page) --&gt;
-&lt;script src="https://pbd.com.np/tools/nepali-calendar/nepali-calendar.js"&gt;&lt;/script&gt;
-
-&lt;!-- 2. Place a container --&gt;
+      <h3>Option A — explicit mount</h3>
+      <pre><code>&lt;script src="https://pbd.com.np/tools/nepali-calendar/nepali-calendar.js"&gt;&lt;/script&gt;
 &lt;div id="my-calendar"&gt;&lt;/div&gt;
-
-&lt;!-- 3. Mount it --&gt;
 &lt;script&gt;
   NepaliCalendar.mount('#my-calendar', {
-    lang: 'ne',          // 'ne' or 'en'
-    theme: 'light',      // 'light' | 'dark' | 'auto'
+    lang: 'ne',
+    theme: 'auto',
     timeZone: 'Asia/Kathmandu',
     showAD: true,
     langToggle: true
   });
 &lt;/script&gt;</code></pre>
 
-      <p>After the script loads, any day cell can be dragged onto a normal input or textarea on the same page. The field receives the ISO date.</p>
-
-      <h3>2. Zero-JavaScript auto-mount</h3>
-      <p>If you prefer not to write your own script tag for mounting:</p>
+      <h3>Option B — data attribute (no mount call)</h3>
       <pre><code>&lt;div data-nepali-calendar
      data-lang="ne"
      data-theme="auto"
      data-time-zone="Asia/Kathmandu"&gt;&lt;/div&gt;
 &lt;script src="https://pbd.com.np/tools/nepali-calendar/nepali-calendar.js"&gt;&lt;/script&gt;</code></pre>
 
-      <h3>Useful API helpers</h3>
+      <h3>Optional helpers</h3>
       <pre><code>NepaliCalendar.toAD(2082, 7, 16);   // → "2025-11-02"
 NepaliCalendar.toBS("2025-11-02");  // → { year: 2082, month: 7, day: 16 }
 NepaliCalendar.today("Asia/Kathmandu");</code></pre>
 
-      <h2>Why this helps developers and form builders</h2>
-      <ul>
-        <li>Users can pick a BS date visually and drop the correct AD value into your form fields without leaving the page.</li>
-        <li>No backend required — everything runs in the browser.</li>
-        <li>Works offline after the first load (service-worker friendly).</li>
-        <li>Consistent date format (ISO <code>yyyy-mm-dd</code>) ready for databases and APIs.</li>
-      </ul>
-
       <div class="callout">
-        <strong>Backlink &amp; attribution</strong>
-        When you embed the calendar, keep the script source pointing to <code>https://pbd.com.np/tools/nepali-calendar/nepali-calendar.js</code>. A visible credit link back to the original tool page is appreciated and helps others discover the free resource.
+        <strong>Attribution</strong>
+        Credit the source with a visible link to <a href="https://pbd.com.np/tools/nepali-calendar/" rel="noopener">the tool page</a>. That keeps the relationship clear for users and for search engines.
       </div>
 
-      <h2>Related free tools on the same site</h2>
+      <h2>How this guide differs from the tool page</h2>
+      <p>The <a href="https://pbd.com.np/tools/nepali-calendar/" rel="noopener">pbd.com.np calendar</a> is the product: full interactive UI, offline behaviour, and the library itself. This github.io page is a walkthrough — when to use it for forms, a working embed sample, and copy-paste mount code. If you only need the calendar, use the tool. If you need to learn or embed it, stay here and follow the links back to pbd.com.np.</p>
+
+      <h2>Related</h2>
       <ul>
-        <li><a href="https://pbd.com.np/tools/nepali-date-converter/" rel="noopener">BS ↔ AD date converter</a> — type a date on either side</li>
-        <li><a href="https://pbd.com.np/tools/today-nepali-date/" rel="noopener">Today’s Nepali date</a> — current BS date, day name and tithi</li>
-        <li><a href="https://pbd.com.np/tools/bs-age-calculator/" rel="noopener">BS Age Calculator</a> — age from a Bikram Sambat birth date</li>
-        <li><a href="https://padamdahal.github.io/guides/bs-ad-for-forms.html">Guide: converting BS ↔ AD for official forms</a></li>
+        <li><a href="https://pbd.com.np/tools/nepali-date-converter/" rel="noopener">BS ↔ AD date converter</a> — type either side</li>
+        <li><a href="https://pbd.com.np/tools/today-nepali-date/" rel="noopener">Today’s Nepali date</a> — BS date, day name, tithi</li>
+        <li><a href="https://pbd.com.np/tools/bs-age-calculator/" rel="noopener">BS Age Calculator</a></li>
+        <li><a href="/guides/bs-ad-for-forms.html">Guide: convert BS ↔ AD for official forms in Nepal</a></li>
       </ul>
 
-      <h2>Frequently asked questions</h2>
-      <p><strong>How do I copy a date?</strong><br>
-      Click any day (or focus it and press Enter). The Gregorian ISO date is copied to the clipboard.</p>
+      <h2>Quick answers</h2>
+      <p><strong>Where should I send users who only need a calendar?</strong><br>
+      Straight to <a href="https://pbd.com.np/tools/nepali-calendar/" rel="noopener">pbd.com.np/tools/nepali-calendar</a>.</p>
 
-      <p><strong>How does drag-to-fill work?</strong><br>
-      Drag a day cell and drop it on any text or date input on the same page. The field is set to the ISO date. Readonly fields are filled by default.</p>
+      <p><strong>Can I host a fork of the script?</strong><br>
+      Prefer the official URL so fixes and calendar updates apply automatically. If you must self-host, keep a clear credit and link to the original tool.</p>
 
-      <p><strong>Can I use this calendar on my own website?</strong><br>
-      Yes. Include the script and call <code>NepaliCalendar.mount()</code> (or use the data-attribute auto-mount). Click-to-copy and drag-to-fill then work on your forms.</p>
-
-      <p><strong>Does it work offline?</strong><br>
-      Yes. After the first visit the page and library work fully offline.</p>
-
-      <p><strong>Is the data accurate for official documents?</strong><br>
-      The calendar table matches common sources used in Nepal. Always double-check critical legal or financial dates, especially after BS 2083.</p>
-
-      <h2>Summary</h2>
-      <p>The Interactive Nepali Calendar is a practical month view for Bikram Sambat dates with one-click AD copy and drag-and-drop into form fields. For sites that collect dates from Nepali users, embedding the same library gives visitors a familiar BS interface while still storing clean ISO dates.</p>
+      <p><strong>Will embedding this page’s demo affect search rankings?</strong><br>
+      No. The demo is the same public library loaded from pbd.com.np. This guide keeps a self-referencing canonical and unique framing so it is treated as a how-to, not a second tool homepage.</p>
 
       <div class="tool-box">
-        <a class="btn" href="https://pbd.com.np/tools/nepali-calendar/" rel="noopener">Try the calendar now (pbd.com.np) →</a>
+        <a class="btn" href="https://pbd.com.np/tools/nepali-calendar/" rel="noopener">Use the full calendar on pbd.com.np →</a>
       </div>
     </article>
 
@@ -246,5 +261,18 @@ NepaliCalendar.today("Asia/Kathmandu");</code></pre>
       <p><a href="/">← All guides</a> · Written by Padam Dahal · Tools at <a href="https://pbd.com.np/" rel="noopener">Powered By Digital</a></p>
     </footer>
   </div>
+
+  <script src="https://pbd.com.np/tools/nepali-calendar/nepali-calendar.js"></script>
+  <script>
+    if (window.NepaliCalendar && typeof NepaliCalendar.mount === 'function') {
+      NepaliCalendar.mount('#calendar-demo', {
+        lang: 'ne',
+        theme: 'auto',
+        timeZone: 'Asia/Kathmandu',
+        showAD: true,
+        langToggle: true
+      });
+    }
+  </script>
 </body>
 </html>
